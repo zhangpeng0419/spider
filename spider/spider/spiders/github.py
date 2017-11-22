@@ -32,7 +32,7 @@ class GitHubSpider(scrapy.Spider):
 	        'utf8':'✓',
 	        'authenticity_token':authenticity_token,
 	        'login':'496990965@qq.com',
-	        'password':'rtq15810261604',
+	        'password':'*************',
 	    }
 		return [ FormRequest(
 	                'https://github.com/session',
