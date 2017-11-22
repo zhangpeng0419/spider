@@ -7,6 +7,12 @@
 
 from scrapy import signals
 
+class ImagesFangDao(object):
+
+    def process_request(self, request, spider):
+        referer = request.meta.get('referer', None)
+        if referer:
+            request.headers['referer'] = referer
 
 class SpiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
