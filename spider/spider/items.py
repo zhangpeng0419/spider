@@ -26,3 +26,7 @@ class QiDian(Item):
 	status = Field()
 	wordcounts = Field()
 	images_url = Field()
+
+class Files(Item):
+	file_urls = Field()
+	file_paths = Field()
