@@ -30,3 +30,11 @@ class QiDian(Item):
 class Images(Item):
 	images_urls = Field()
 	image_paths = Field()
+
+
+class ToRedis(Item):
+	images_urls = Field()
+
+class Files(Item):
+	file_urls = Field()
+	file_paths = Field()

@@ -88,3 +88,23 @@ ROBOTSTXT_OBEY = False
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+
+REDIS_URL='redis://:rentianqi123456@111.231.197.82:6379'
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+SCHEDULER_PERSIST = True
+FILES_STORE = 'download/'
+FILES_EXPIRES = '90'
+
+
+
+
+
+
+
+
+
+
+

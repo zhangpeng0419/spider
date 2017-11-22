@@ -7,6 +7,10 @@
 
 import mysql.connector
 import sys
+import redis
+import scrapy
+from scrapy.pipelines.files import FilesPipeline
+from scrapy.exceptions import DropItem
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -40,3 +44,24 @@ class ToSpiderQiDian(object):
 			dbObject.rollback()
 		return item
 
+class ToRedis(object):
+	"""docstring for QiDian"""
+	def process_item(self,item,spider):
+		try:
+			r = redis.Redis(host='111.231.197.82', port=6379, db=0,password='rentianqi123456')
+			r.lpush('downloadurl',item['images_urls'])
+		except BaseException as e:
+			print("error>>>>>>>>>>>>>",e,"<<<<<<<<<<<<<error")
+		return item
+
+class DownLoadFilesPipeline(FilesPipeline):
+
+	def get_media_requests(self, item, info):
+		yield scrapy.Request(item["file_urls"])
+
+	def item_completed(self, results, item, info):
+		file_paths = [x["path"] for ok, x in results if ok]
+		if not file_paths:
+			raise DropItem("Item contains no files")
+		item['file_paths'] = file_paths
+		return item
